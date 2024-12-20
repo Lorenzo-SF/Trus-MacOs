@@ -17,16 +17,15 @@
 # ====== Generales
 
 DATE_NOW=$(date +"%Y-%m-%d_%H-%M-%S")
-HEADER_MESSAGE="Truedat Utils (TrUs)"
+HEADER_MESSAGE="Truedat Utils (TrUs) - Apol Silicón Version"
 DESCRIPTION_MESSAGE=""
 USER_HOME=$(eval echo ~"$SUDO_USER")
-TRUS_PACKAGES=("git" "curl" "ca-certificates" "curl" "gnupg" "lsb-release" "unzip" "zip" "wget" "vim" "zsh" "fzf" "sl" "neofetch" "jq" "screen" "tmux" "build-essential" "wmctrl" "libssl-dev" "automake" "autoconf" "gedit" "redis-tools" "libncurses6" "libncurses-dev" "postgresql-client" "xclip" "xdotool" "gdebi-core" "fonts-powerline" "xsltproc" "fop" "libxml2-utils" "bc")
-DOCKER_PACKAGES=("docker-ce" "docker-ce-cli" "containerd.io" "docker-compose" "docker-compose-plugin")
-                    
+TRUS_PACKAGES=("git" "curl" "ca-certificates" "gnupg" "unzip" "zip" "wget" "vim" "zsh" "fzf" "sl" "neofetch" "jq" "screen" "tmux" "automake" "autoconf" "gedit" "xclip" "xdotool" "fop" "bc" "lolcat" "redis" "postgresql" "docker")
+
 # =================================================================================================
 # ====== Rutas y enlaces simbolicos
 
-LINK_BASE_PATH=~/.local/bin/
+LINK_BASE_PATH=/usr/local/bin
 
 TRUS_BASE_PATH=$USER_HOME/trus
 TRUS_CONFIG=$TRUS_BASE_PATH/trus.sh
@@ -120,9 +119,8 @@ HEADER_LOGO=("  _________   ______     __  __    ______       "
 )
 
 MAIN_MENU_OPTIONS=("0 - Salir" "1 - Configurar" "2 - Acciones principales" "3 - Actiones secundarias" "4 - Ayuda")
-CONFIGURE_MENU_OPTIONS=("0 - Volver" "1 - Instalación de paquetes y configuración de Truedat" "2 - (Re)instalar ZSH y Oh My ZSH" "3 - Archivos de configuración" "4 - Actualizar splash loader" "5 - Actualizar la memoria SWAP (a $SWAP_SIZE GB)" "6 - Configurar animación de los mensajes" "7 - Configurar colores")
-CONFIGURATION_FILES_MENU_OPTIONS=("0 - Volver" "1 - ZSH" "2 - BASH" "3 - Fix login Google (solo BASH)" "4 - TMUX" "5 - TLP" "6 - Añadir al archivo de hosts info de Truedat" "7 - Todos")
-ANIMATION_MENU_OPTIONS=("0 - Volver" "1 - Pintar test animaciones" ${ANIMATIONS[@]})
+CONFIGURE_MENU_OPTIONS=("0 - Volver" "1 - Instalación de paquetes y configuración de Truedat" "2 - Instalar Oh My ZSH" "3 - Archivos de configuración" "4 - Configurar animación de los mensajes" "5 - Configurar colores")
+CONFIGURATION_FILES_MENU_OPTIONS=("0 - Volver" "1 - ZSH" "2 - TMUX" "3 - Añadir al archivo de hosts info de Truedat" "4 - Todos")
 PRINCIPAL_ACTIONS_MENU_OPTIONS=("0 - Volver" "1 - Arrancar Truedat" "2 - Matar Truedat" "3 - Operaciones de bdd" "4 - Operaciones de repositorios" "5 - Sesiones (Tmux y Screen)")
 START_MENU_OPTIONS=("0 - Volver" "1 - Todo" "2 - Solo contenedores" "3 - Solo servicios" "4 - Solo el frontal")
 SECONDARY_ACTIONS_MENU_OPTIONS=("0 - Volver" "1 - Indices de ElasticSearch" "2 - Claves SSH" "3 - Kong" "4 - Linkado de modulos del frontal" "5 - Llamada REST que necesita token de login" "6 - Carga de estructuras" "7 - Carga de linajes" "8 - Informe PiDi")
@@ -242,23 +240,23 @@ print_title() {
 
     local empty_space="                               "
     local logo=(""
-    " ⢤⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣶⣶⣶⣤⣤⣀⠀⠀⠀⠀⠀⠀⠀⢀ "
-    " ⠀⢻⣶⣄⠀⣀⣴⣿⠿⠛⠉⠀⠀⠀⠀⠉⠛⣿⣷⣤⠀⢀⣤⣾⠋ "
-    " ⠀⠀⠙⢿⣿⣿⣿⣷⣶⣤⠀⠀⠀⠀⠀⢀⣤⣶⣿⣿⣿⣿⠿⠁  "
-    " ⠀⠀⠀⢰⣿⠍⡋⠻⢿⣿⣿⣷⡀⣠⣾⣿⣿⠿⢛⠫⢿⣿    $(print_separator "$empty_space" "⣿" "full" "right" "gradient" | xargs)"
-    " ⠀⠀⠀⣿⣿⠐⠢⢌⢌⢌⢻⣿⣿⣿⣿⡫⢅⠨⢐⢡⠘⣿⣇   "
-    " ⠀⠀⢰⣿⡏⠀⠈⠕⡑⡑⡑⠈⣿⡿⠑⡊⡐⠢⠪⠁⠀⣿⣿   ⣠⣤⣤⣤⣤⣤⣤       ⢠⡄    ⢠⣄       "
-    " ⠀⠀⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⡇  ⠈⠉⠉⣿⡏⠉⠉       ⢸⡇    ⢸⣿         $HEADER_MESSAGE"
-    " ⠀⢀⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿     ⣿⡇   ⢸⣧⣾⠟⠛ ⢸⡇    ⢸⣿ ⢀⣾⠛⠛⠿⠃ "
-    " ⠀⣸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⣿⠈⣿⣿⡀    ⣿⡇   ⢸⣿    ⢸⡇    ⢸⣿ ⠘⣿⣄     $GIT_USER_NAME ($GIT_USER_EMAIL)"
-    " ⠀⣿⣿⣯⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣿⣿⡿⠀⠀⣿⣿⡇    ⣿⡇   ⢸⣿    ⢸⣇    ⢸⡟   ⠉⠛⣿⡄  $EQUIPO"
-    " ⠀⣿⣿⣿⠀⠀⠀⠀⠀⣀⣤⣶⣿⣿⣿⣿⣿⠟⠁⠀⠀⢠⣿⣿⡇    ⣿⡇   ⢸⣿    ⠈⣿⣤⣀⣀⣠⣿⠁ ⢠⣀ ⣀⣼⠇  $DESCRIPTION_MESSAGE"
-    " ⠀⠸⣿⣿⣷⠀⣠⣾⣿⣿⣿⣿⣿⠟⠋⠁⠀⠀⠀⠀⢠⣿⣿⣿     ⠉⠁   ⠈⠉      ⠉⠉⠉⠉    ⠉⠉⠉⠁ "
-    " ⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⠿⠁⠀⠀⠀⠀⠀⠀⠀⣴⣿⣿⣿⠁  "
-    " ⠀⠀⠀⠘⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⣤⣿⣿⣿⠟    $(print_separator "$empty_space" "⣿" "full" "right" "gradient" | xargs)"
-    " ⠀⠀⠀⠀⠀⠙⣿⣿⣿⣿⣤⡀⠀⠀⣀⣶⣿⣿⣿⡿⠁     "
-    " ⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁       "
-    " ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⡿⠋          ")
+        " ⢤⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣶⣶⣶⣤⣤⣀⠀⠀⠀⠀⠀⠀⠀⢀ "
+        " ⠀⢻⣶⣄⠀⣀⣴⣿⠿⠛⠉⠀⠀⠀⠀⠉⠛⣿⣷⣤⠀⢀⣤⣾⠋ "
+        " ⠀⠀⠙⢿⣿⣿⣿⣷⣶⣤⠀⠀⠀⠀⠀⢀⣤⣶⣿⣿⣿⣿⠿⠁  "
+        " ⠀⠀⠀⢰⣿⠍⡋⠻⢿⣿⣿⣷⡀⣠⣾⣿⣿⠿⢛⠫⢿⣿    $(print_separator "$empty_space" "⣿" "full" "right" "gradient" | xargs)"
+        " ⠀⠀⠀⣿⣿⠐⠢⢌⢌⢌⢻⣿⣿⣿⣿⡫⢅⠨⢐⢡⠘⣿⣇   "
+        " ⠀⠀⢰⣿⡏⠀⠈⠕⡑⡑⡑⠈⣿⡿⠑⡊⡐⠢⠪⠁⠀⣿⣿   ⣠⣤⣤⣤⣤⣤⣤       ⢠⡄    ⢠⣄       "
+        " ⠀⠀⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⡇  ⠈⠉⠉⣿⡏⠉⠉       ⢸⡇    ⢸⣿         $HEADER_MESSAGE"
+        " ⠀⢀⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿     ⣿⡇   ⢸⣧⣾⠟⠛ ⢸⡇    ⢸⣿ ⢀⣾⠛⠛⠿⠃ "
+        " ⠀⣸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⣿⠈⣿⣿⡀    ⣿⡇   ⢸⣿    ⢸⡇    ⢸⣿ ⠘⣿⣄     $GIT_USER_NAME ($GIT_USER_EMAIL)"
+        " ⠀⣿⣿⣯⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣿⣿⡿⠀⠀⣿⣿⡇    ⣿⡇   ⢸⣿    ⢸⣇    ⢸⡟   ⠉⠛⣿⡄  $EQUIPO"
+        " ⠀⣿⣿⣿⠀⠀⠀⠀⠀⣀⣤⣶⣿⣿⣿⣿⣿⠟⠁⠀⠀⢠⣿⣿⡇    ⣿⡇   ⢸⣿    ⠈⣿⣤⣀⣀⣠⣿⠁ ⢠⣀ ⣀⣼⠇  $DESCRIPTION_MESSAGE"
+        " ⠀⠸⣿⣿⣷⠀⣠⣾⣿⣿⣿⣿⣿⠟⠋⠁⠀⠀⠀⠀⢠⣿⣿⣿     ⠉⠁   ⠈⠉      ⠉⠉⠉⠉    ⠉⠉⠉⠁ "
+        " ⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⠿⠁⠀⠀⠀⠀⠀⠀⠀⣴⣿⣿⣿⠁  "
+        " ⠀⠀⠀⠘⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⣤⣿⣿⣿⠟    $(print_separator "$empty_space" "⣿" "full" "right" "gradient" | xargs)"
+        " ⠀⠀⠀⠀⠀⠙⣿⣿⣿⣿⣤⡀⠀⠀⣀⣶⣿⣿⣿⡿⠁     "
+        " ⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁       "
+        " ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⡿⠋          " "" "")
 
     local centered_logo=()
     local min_length=${#logo[0]}
@@ -332,7 +330,7 @@ print_logo() {
         "            ⣿⣿      ⣿⠏     ⣿⡇    ⢸⣿  ⢠⣿⠁    ⣿⡇ ⢰⣿⠁    ⣿⣿        ⢸⣿   ⣿⣿        "
         "            ⣿⣿      ⣿      ⣿⡇    ⢸⣿  ⢸⣿⠿⠿⠿⠿⠿⠿⠇ ⢸⣿     ⢸⣿   ⣴⣿⠿⠛⠛⢻⣿   ⣿⣿        "
         "            ⣿⣿      ⣿      ⣿⡇    ⣾⣿  ⠘⣿⡄       ⠘⣿⡄    ⣿⣿  ⣼⣿    ⣸⣿   ⣿⣿        "
-        "            ⣿⣿      ⣿      ⢻⣿⣤⣀⣤⣾⢿⣿   ⠹⣿⣦⣤⣠⣤⣴   ⠻⣿⣤⣀⣤⣾⢻⣿  ⠸⣿⣦⣀⣠⣶⠿⣿   ⢻⣿⣤⣀⡄     "     
+        "            ⣿⣿      ⣿      ⢻⣿⣤⣀⣤⣾⢿⣿   ⠹⣿⣦⣤⣠⣤⣴   ⠻⣿⣤⣀⣤⣾⢻⣿  ⠸⣿⣦⣀⣠⣶⠿⣿   ⢻⣿⣤⣀⡄     "
         "            ⠉⠉      ⠉       ⠈⠉⠋⠉  ⠉     ⠉⠉⠋⠉⠁     ⠉⠋⠉ ⠈⠉    ⠉⠋⠉  ⠉    ⠈⠉⠉⠁     "
 
     )
@@ -354,43 +352,80 @@ print_logo() {
 # =================================================================
 
 clone_truedat_project() {
+    local updated_option=${1:-""}
+
     mkdir -p $TRUEDAT_ROOT_PATH
     mkdir -p $BACK_PATH
     mkdir -p $BACK_PATH/logs
     mkdir -p $FRONT_PATH
 
     if [[ "$(print_question '¿Descargar los repos condespondiente de Truedat?')" = "Y" ]]; then
-        
-        #Este eval está porque en una distro diferente a Ubuntu no se mantiene el agente levantado ni la clave registrada-        
-        eval "$(ssh-agent -s)"
+
+        #Este eval está porque en una distro diferente a Ubuntu no se mantiene el agente levantado ni la clave registrada-
+        exec_command 'eval "$(ssh-agent -s)"'
         ssh-add $SSH_PRIVATE_FILE
 
-        clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-ai.git $BACK_PATH/td-ai
-        clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-audit.git $BACK_PATH/td-audit
-        clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-auth.git $BACK_PATH/td-auth
-        clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-bg.git $BACK_PATH/td-bg
-        clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-dd.git $BACK_PATH/td-dd
-        clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-df.git $BACK_PATH/td-df
-        clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-ie.git $BACK_PATH/td-ie
-        clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-qx.git $BACK_PATH/td-qx
-        clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-i18n.git $BACK_PATH/td-i18n
-        clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-lm.git $BACK_PATH/td-lm
-        clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-se.git $BACK_PATH/td-se
+        case "$updated_option" in
+        "-b" | "--back")
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-ai.git $BACK_PATH/td-ai
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-audit.git $BACK_PATH/td-audit
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-auth.git $BACK_PATH/td-auth
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-bg.git $BACK_PATH/td-bg
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-dd.git $BACK_PATH/td-dd
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-df.git $BACK_PATH/td-df
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-ie.git $BACK_PATH/td-ie
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-qx.git $BACK_PATH/td-qx
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-i18n.git $BACK_PATH/td-i18n
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-lm.git $BACK_PATH/td-lm
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-se.git $BACK_PATH/td-se
 
-        clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/td-helm.git $BACK_PATH/td-helm
-        clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/clients/demo/k8s.git $BACK_PATH/k8s
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/td-helm.git $BACK_PATH/td-helm
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/clients/demo/k8s.git $BACK_PATH/k8s
 
-        clone_if_not_exists git@github.com:Bluetab/td-df-lib.git $BACK_PATH/td-df-lib
-        clone_if_not_exists git@github.com:Bluetab/td-cache.git $BACK_PATH/td-cache
-        clone_if_not_exists git@github.com:Bluetab/td-core.git $BACK_PATH/td-core
-        clone_if_not_exists git@github.com:Bluetab/td-cluster.git $BACK_PATH/td-cluster
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/true-dev.git $DEV_PATH
 
-        clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/front-end/td-web-modules.git $FRONT_PATH/td-web-modules
-        clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/front-end/td-web $FRONT_PATH/td-web
+            set_elixir_versions
+            ;;
 
-        clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/true-dev.git $DEV_PATH
+        "-f" | "--front")
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/front-end/td-web-modules.git $FRONT_PATH/td-web-modules
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/front-end/td-web $FRONT_PATH/td-web
 
-        set_elixir_versions
+            ;;
+
+        "-l" | "--libs")
+            clone_if_not_exists git@github.com:Bluetab/td-df-lib.git $BACK_PATH/td-df-lib
+            clone_if_not_exists git@github.com:Bluetab/td-cache.git $BACK_PATH/td-cache
+            clone_if_not_exists git@github.com:Bluetab/td-core.git $BACK_PATH/td-core
+            clone_if_not_exists git@github.com:Bluetab/td-cluster.git $BACK_PATH/td-cluster
+            ;;
+
+        "-a" | "--all" | "")
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-ai.git $BACK_PATH/td-ai
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-audit.git $BACK_PATH/td-audit
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-auth.git $BACK_PATH/td-auth
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-bg.git $BACK_PATH/td-bg
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-dd.git $BACK_PATH/td-dd
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-df.git $BACK_PATH/td-df
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-ie.git $BACK_PATH/td-ie
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-qx.git $BACK_PATH/td-qx
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-i18n.git $BACK_PATH/td-i18n
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-lm.git $BACK_PATH/td-lm
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/back-end/td-se.git $BACK_PATH/td-se
+
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/td-helm.git $BACK_PATH/td-helm
+            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/clients/demo/k8s.git $BACK_PATH/k8s
+
+            clone_if_not_exists git@github.com:Bluetab/td-df-lib.git $BACK_PATH/td-df-lib
+            clone_if_not_exists git@github.com:Bluetab/td-cache.git $BACK_PATH/td-cache
+            clone_if_not_exists git@github.com:Bluetab/td-core.git $BACK_PATH/td-core
+            clone_if_not_exists git@github.com:Bluetab/td-cluster.git $BACK_PATH/td-cluster
+            
+            set_elixir_versions
+            ;;
+        esac
+
+        
     fi
 }
 
@@ -478,14 +513,14 @@ update_web() {
 }
 
 update_repositories() {
-    local create_dbb=${2:-""}
-    local branch=1
+    local updated_option=${1:-""}
+    local create_dbb=${2:-"0"}
 
     print_title
 
     print_message "Chequeando que existan todos los repos..." "$COLOR_SECONDARY" "both" "center"
-    clone_truedat_project
-    
+    clone_truedat_project "$updated_option"
+
     case "$updated_option" in
     "-b" | "--back")
         update_services "$create_dbb"
@@ -546,7 +581,7 @@ compile_elixir() {
 
     print_message "Actualizando dependencias Elixir (HECHO)" "$COLOR_SUCCESS"
 
-    if [ ! "$create_ddbb" = "" ]; then
+    if [ ! -z "$create_ddbb" ]; then
         print_message_with_animation "Creando bdd..." "$COLOR_TERNARY"
         exec_command "yes | mix ecto.create"
         print_message "Creacion de bdd (HECHO)" "$COLOR_SUCCESS"
@@ -669,7 +704,7 @@ download_test_backup() {
             kubectl --context "${AWS_TEST_CONTEXT}" exec "${PSQL}" -- rm "/${DATABASE}.sql" >/dev/null 2>&1
             print_message "Borrando fichero generado en el pod (HECHO)" "$COLOR_SUCCESS"
 
-            print_message_with_animation "comentado de 'create publication'" "$COLOR_TERNARY"            
+            print_message_with_animation "comentado de 'create publication'" "$COLOR_TERNARY"
             sed -i "" 's/create publication/--create publication/g' "./${FILENAME}" >/dev/null 2>&1
             print_message "Comentado de 'create publication' (HECHO)" "$COLOR_SUCCESS"
 
@@ -1006,95 +1041,6 @@ do_api_call_with_login_token() {
 # ====== Archivos de configuración
 # =================================================================
 
-create_configurations() {
-    bash_config "y"
-    zsh_config
-    tmux_config
-    tlp_config
-}
-
-bash_config() {
-    local google_fix=${1:-""}
-    print_semiheader "Prompt de Bash"
-
-    local fix=''
-    local fix_message=""
-    if [ ! -z "$google_fix" ]; then
-        fix='export LD_PRELOAD=/lib/x86_64-linux-gnu/libnss_sss.so.2'
-        fix_message="(fix login de Google incluido)"
-    fi
-
-    if ! grep -q '## Config añadida por TrUs' "$BASH_PATH_CONFIG"; then
-        cat <<EOF >>$BASH_PATH_CONFIG
-# =================================================================================================
-## Config añadida por TrUs
-# =================================================================================================
-
-export COLORTERM=truecolor
-. "\$HOME/.asdf/asdf.sh"
-. "\$HOME/.asdf/completions/asdf.bash"
-
-# Aliases
-alias ai="cd ~/workspace/truedat/back/td-ai"
-alias audit="cd ~/workspace/truedat/back/td-audit"
-alias auth="cd ~/workspace/truedat/back/td-auth"
-alias bg="cd ~/workspace/truedat/back/td-bg"
-alias dd="cd ~/workspace/truedat/back/td-dd"
-alias df="cd ~/workspace/truedat/back/td-df"
-alias i18n="cd ~/workspace/truedat/back/td-i18n"
-alias ie="cd ~/workspace/truedat/back/td-ie"
-alias lm="cd ~/workspace/truedat/back/td-lm"
-alias qx="cd ~/workspace/truedat/back/td-qx"
-alias se="cd ~/workspace/truedat/back/td-se"
-alias helm="cd ~/workspace/truedat/back/td-helm"
-alias k8s="cd ~/workspace/truedat/back/k8s"
-alias web="cd ~/workspace/truedat/front/td-web"
-alias webmodules="cd ~/workspace/truedat/front/td-web-modules"
-alias trudev="cd ~/workspace/truedat/true-dev"
-alias format="mix format && mix credo --strict"
-
-# Function to shorten path
-shorten_path() {
-    full_path=\$(pwd)
-
-    IFS=/ read -r -a path_parts <<< "\$full_path"
-
-    if (( \${#path_parts[@]} > 3 )); then
-        echo ".../\${path_parts[-3]}/\${path_parts[-2]}/\${path_parts[-1]}"
-    else
-        echo "\$full_path"
-    fi
-}
-
-# Function to get git branch status
-git_branch_status() {
-    branch=\$(git branch --show-current 2>/dev/null)
-    if [[ -n "\$branch" ]]; then
-        if git diff --quiet 2>/dev/null; then
-            echo -e "\033[97;48;5;75m(\$branch)"  # Green branch name
-        else
-            echo -e "\033[30;48;5;214m(\$branch) "  # Yellow branch name
-        fi
-    else
-        echo ""  
-    fi
-}
-
-# Function to set prompt
-set_prompt() {
-    PS1="|\[\033[1;34m\]\t\[\033[m\]|\033[48;5;202m\$(git_branch_status)\033[m|\[\033[1;38;5;202m\]\$(shorten_path)\[\033[m\]> "
-}
-
-# Set the prompt when the directory changes
-PROMPT_COMMAND=set_prompt
-EOF
-
-    fi
-
-    print_message "Prompt de Bash actualizado $fix_message" "$COLOR_SUCCESS" "after"
-    print_message "Cierra la terminal y vuelvela a abrir para que surgan efecto los cambios" "$COLOR_WARNING"
-}
-
 hosts_config() {
     if ! grep -q '# ====== Añadido por trus' "/etc/hosts"; then
         sudo sh -c 'cat <<EOF >> /etc/hosts
@@ -1134,58 +1080,31 @@ EOF
     print_message "Archivo de configuración creado con éxito" "$COLOR_SUCCESS" "after"
 }
 
-tlp_config() {
-    print_semiheader "TLP"
-
-    sudo sh -c " touch $TLP_PATH_CONFIG"
-
-    sudo sh -c "
-cat <<EOF > $TLP_PATH_CONFIG
-TLP_ENABLE=1
-TLP_DEFAULT_MODE=AC
-CPU_SCALING_GOVERNOR_ON_AC=performance
-CPU_SCALING_GOVERNOR_ON_BAT=powersave
-CPU_ENERGY_PERF_POLICY_ON_AC=performance
-CPU_ENERGY_PERF_POLICY_ON_BAT=power-saver
-CPU_MIN_PERF_ON_AC=0
-CPU_MAX_PERF_ON_AC=100
-CPU_MIN_PERF_ON_BAT=0
-CPU_MAX_PERF_ON_BAT=70
-CPU_BOOST_ON_AC=1
-CPU_BOOST_ON_BAT=0
-CPU_HWP_DYN_BOOST_ON_AC=1
-CPU_HWP_DYN_BOOST_ON_BAT=0
-SCHED_POWERSAVE_ON_AC=0
-SCHED_POWERSAVE_ON_BAT=1
-PLATFORM_PROFILE_ON_AC=performance
-PLATFORM_PROFILE_ON_BAT=low-power
-RUNTIME_PM_ON_AC=auto
-RUNTIME_PM_ON_BAT=auto
-EOF
-"
-
-    print_message "Archivo de configuración creado con éxito" "$COLOR_SUCCESS" "after"
-
-    print_message_with_animation "Lanzando TLP para hacer efectiva la nueva configuración" "$COLOR_SUCCESS"
-    exec_command "sudo tlp start"
-    exec_command "sudo systemctl enable tlp.service"
-    print_message "TLP lanzado con éxito" "$COLOR_SUCCESS" "after"
-}
-
 zsh_config() {
     print_semiheader "ZSH"
 
-    cat <<EOF >"$HOME/.zshrc"
+    print_separator "" "=" "full" "" "$COLOR_SAD"
+    print_message "OJETE CON ESTO" "$COLOR_ERROR" "" "centered"
+    print_message "Se va a SOBREESCRIBIR el archivo .zshrc" "$COLOR_ERROR" "" "centered"
+    print_message "Si tenias configuracion propia, es momento de guardarla" "$COLOR_ERROR" "" "centered"
+    print_separator "" "=" "full" "" "$COLOR_SAD" "after"
+
+    if [[ "$(print_question "¿Continuar?" "$COLOR_WARNING")" = "Y" ]]; then
+        cat <<EOF >"$HOME/.zshrc"
 export PATH=\$HOME/bin:\$HOME/.local/bin:/usr/local/bin:\$PATH
 export COLORTERM=truecolor
 export ZSH="\$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
-plugins=(git elixir asdf fzf zsh-autosuggestions zsh-syntax-highlighting zsh-completions)
+
+. "\$HOME/.asdf/asdf.sh"
+. "\$HOME/.asdf/completions/asdf.bash"
+
+plugins=(git elixir asdf zsh-autosuggestions zsh-syntax-highlighting zsh-completions)
 
 zstyle :omz:update mode auto # update automatically without asking
 zstyle :omz:update frequency 1
 
-source $ZSH/oh-my-zsh.sh
+source \$ZSH/oh-my-zsh.sh
 source shell-tools
 
 set_terminal_config
@@ -1213,13 +1132,15 @@ alias trudev="cd ~/workspace/truedat/true-dev"
 alias mixmix="mix format && mix credo --strict"
 
 preexec() {
-    if [[ "$1" == git* ]]; then
+    if [[ "\$1" == git* ]]; then
         ssh-agent -s > /dev/null 2>&1
         ssh-add ~/.ssh/truedat > /dev/null 2>&1
     fi
 }
 
 EOF
+
+    fi
 
     print_message "ZSH config file created succesfully." "$COLOR_SUCCESS" "after"
     print_message "Close and open all terminals to apply changes" "$COLOR_PRIMARY" "after"
@@ -1248,24 +1169,18 @@ aws_configure() {
 # =================================================================
 
 install_trus() {
-    if [ ! -e "$HOME/.shell-tools" ]; then
-        ./shell-tools.sh
-        export PATH=~/.local/bin/:$PATH
-    fi
-
-    source ~/.local/bin/shell-tools
-
     print_header "$COLOR_SECONDARY" "Bienvenido al instalador de TrUs (Truedat Utils)"
 
-    mkdir -p "$TRUS_BASE_PATH"
-    rm -f "$TRUS_BASE_PATH"/*
-    cp -r $(pwd)/trus.sh "$TRUS_BASE_PATH"
+    sudo mkdir -p "$LINK_BASE_PATH"
+
+    if [[ -e "$TRUS_LINK_PATH" ]]; then
+        sudo rm -f $TRUS_LINK_PATH
+    fi
 
     sudo rm -f $TRUS_LINK_PATH
     sudo ln -s $TRUS_PATH $TRUS_LINK_PATH
 
     print_semiheader "Truedat Utils (TrUs) instalado con éxito" "$COLOR_TERNARY" "" "center"
-
 }
 
 preinstallation() {
@@ -1278,39 +1193,29 @@ preinstallation() {
         for package in "${TRUS_PACKAGES[@]}"; do
             print_message " > $package" "$COLOR_TERNARY"
         done
-        for package in "${DOCKER_PACKAGES[@]}"; do
-            print_message " > $package" "$COLOR_TERNARY"
-        done
-        print_message " - Instalación de FZF" "$COLOR_SECONDARY" "before"
+        print_message " - Instalación de FZF, para los menuses de Trus" "$COLOR_SECONDARY" "before"
         print_message " - Configuracion de info de usuario de GIT:" "$COLOR_SECONDARY"
         print_message " - Instalación de AWSCLI" "$COLOR_SECONDARY"
         print_message " - Instalación de KUBECTL" "$COLOR_SECONDARY"
+        print_message " - Instalación de DOCKER" "$COLOR_SECONDARY"
         print_message " - Instalación de ASDF y plugins" "$COLOR_SECONDARY" "after"
 
-        print_message "En el paso de la instalacion donde se ofrece instalar zsh y oh my zsh, si se decide instalarlo, cuando esté disponible ZSH, escribir "exit" para salir de dicho terminal y terminar con la instalación" "$COLOR_PRIMARY"
-        print_message "ya que la instalación se ha lanzado desde bash y en ese contexto, zsh es un proceso lanzado mas y se queda esperando hasta terminar (con el exit), no la terminal por defecto." "$COLOR_PRIMARY" "after"
-
-        # if [[ "$(print_question "LA INSTALACIÓN VA A COMENZAR. ¿Continuar?" "$COLOR_WARNING")" = "Y" ]]; then
+        if [[ "$(print_question "LA INSTALACIÓN VA A COMENZAR. ¿Continuar?" "$COLOR_WARNING")" = "Y" ]]; then
             print_semiheader "Instalación paquetes de software" "$COLOR_TERNARY" "" "center"
 
             install_packages "yes" "${TRUS_PACKAGES[@]}"
-
-            if [ -e "~/.fzf" ]; then
-                rm -fr ~/.fzf
-                clone_if_not_exists "https://github.com/junegunn/fzf.git" "~/.fzf"
-                exec_command "~/.fzf/install"
-            fi
-
             config_git
             install_docker
             install_awscli
             install_kubectl
             install_asdf
+            install_omz
+            zsh_config
 
             touch "/tmp/trus_install"
-        # else
-        #     print_header "$COLOR_ERROR" "NO ESTAS PREPARADO"
-        # fi
+        else
+            print_header "$COLOR_ERROR" "NO ESTAS PREPARADO"
+        fi
     fi
 }
 
@@ -1339,15 +1244,15 @@ install_truedat() {
 
             aws_configure
             hosts_config
-
+            clone_truedat_project "-a"
             start_containers
-            clone_truedat_project
 
             cd $DEV_PATH
+            echo "SERVICES_HOST=host.docker.internal" >local_ip.env
             sudo sysctl -w vm.max_map_count=262144
             sudo cp elastic-search/999-map-count.conf /etc/sysctl.d/
 
-             "-a" "yes"
+            update_repositories "-a" "yes"
             link_web_modules
             ddbb "-du"
             config_kong
@@ -1385,8 +1290,8 @@ install_asdf() {
         exec_command "asdf plugin add yarn"
         print_message "Plugins de ASDF instalados" "$COLOR_SUCCESS"
 
-        print_message_with_animation "Descargando versiones de Erlang, Elixir, NodeJS y Yarn" "$COLOR_TERNARY"
-        exec_command "KERL_BUILD_DOCS=yes asdf install erlang 25.3"
+        print_message_with_animation "Descargando versiones de Erlang (la version chunga de Saúl, que si funciona en Apol Silicón), Elixir, NodeJS y Yarn" "$COLOR_TERNARY"
+        exec_command "KERL_CONFIGURE_OPTIONS="--disable-jit" asdf install erlang 25.3.2.6"
         exec_command "asdf install elixir 1.13.4"
         exec_command "asdf install elixir 1.14.5-otp-25"
         exec_command "asdf install elixir 1.15"
@@ -1396,7 +1301,7 @@ install_asdf() {
         print_message "Versiones instaladas" "$COLOR_SUCCESS"
 
         print_message_with_animation "Seteando versiones por defecto" "$COLOR_TERNARY"
-        exec_command "asdf global erlang 25.3"
+        exec_command "asdf global erlang 25.3.2.6"
         exec_command "asdf global elixir 1.14.5-otp-25"
         exec_command "asdf global nodejs 20.18.0"
         exec_command "asdf global yarn latest"
@@ -1416,42 +1321,18 @@ install_docker() {
     print_semiheader "Docker"
     if [[ ! -e "$AWS_PATH" ]] || [[ "$(print_question 'Ya hay una instalación de Docker, pero si lo deseas se puede volver a lanzar el asistente de instalación. ¿Continuar?')" = "Y" ]]; then
         print_message_with_animation "Instalando Docker" "$COLOR_SECONDARY"
-        
-        exec_command "sudo install -m 0755 -d /etc/apt/keyrings"
-        exec_command "sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc"
-        exec_command "sudo chmod a+r /etc/apt/keyrings/docker.asc"
 
-        exec_command "echo \
-        'deb [arch=$SYSTEM_ARCHITECTURE signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/$ID $VERSION_CODENAME stable' | \
-        sudo tee /etc/apt/sources.list.d/docker.list > /dev/null"
-         
-        install_packages "yes" "${DOCKER_PACKAGES[@]}"
+        sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
 
-        if [ ! -z "$DEV_PATH" ]; then
-            mkdir -p $TRUEDAT_ROOT_PATH
-            clone_if_not_exists git@gitlab.bluetab.net:dgs-core/true-dat/true-dev.git $DEV_PATH
-        fi
-
-        cd $DEV_PATH
-
-       
-        print_message "Docker y configurado" "$COLOR_SUCCESS"
+        print_message "Docker instalado y configurado" "$COLOR_SUCCESS"
     fi
 }
 install_awscli() {
     print_semiheader "AWS"
     if [[ ! -e "$AWS_PATH" ]] || [[ "$(print_question 'Ya hay una instalación de AWS, pero si lo deseas se puede volver a lanzar el asistente de instalación. ¿Continuar?')" = "Y" ]]; then
-        local arch="x86_64"
-        if [ $SYSTEM_ARCHITECTURE = "amd64" ]; then
-            arch="aarch64"
-        fi
-        
-        mkdir -p $AWS_PATH
-        cd $AWS_PATH                            
-        exec_command "curl 'https://awscli.amazonaws.com/awscli-exe-linux-$arch.zip' -o 'awscliv2.zip'"
-        unzip awscliv2.zip
-        cd aws
-        sudo ./install
+        curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+        sudo installer -pkg AWSCLIV2.pkg -target /
     fi
 }
 
@@ -1461,9 +1342,12 @@ install_kubectl() {
 
         mkdir -p $KUBE_PATH
 
-        cd $KUBE_PATH
+        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"
+        chmod +x ./kubectl
+        sudo mv ./kubectl /usr/local/bin/kubectl
+        sudo chown root: /usr/local/bin/kubectl
 
-        exec_command "curl -LO https://dl.k8s.io/release/v1.23.6/bin/linux/$SYSTEM_ARCHITECTURE/kubectl && sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl"
+        cd $KUBE_PATH
 
         touch "$KUBECONFIG_PATH"
 
@@ -1524,7 +1408,11 @@ install_kubectl() {
 
         } >$KUBECONFIG_PATH
 
+        kubectl config use-context test-truedat-eks
+
+        print_message_with_animation "Lanzando las movidas de Zoe"
         aws eks update-kubeconfig --region eu-west-1 --name $AWS_TEST_CONTEXT
+        print_message_with_animation "Movidas de Zoe ejecutadas"
 
         print_message "Kubectl instalado y configurado" "$COLOR_SUCCESS"
     fi
@@ -1669,7 +1557,7 @@ activate_kong() {
 
         for container in "${CONTAINERS_SETUP[@]}"; do
             print_message " > $container" "$COLOR_SECONDARY"
-            exec_command "docker-compose up -d '${container}'"            
+            exec_command "docker-compose up -d '${container}'"
         done
 
         # target: "https://test.truedat.io:443",       -> Se utilizarán los servicios del entorno test
@@ -1935,7 +1823,8 @@ config_kong() {
 # =================================================================================================
 
 start_containers() {
-    print_semiheader "Contenedores Docker"
+    source shell-tools
+    print_semiheader "Contenedores Docker" ""
 
     cd $DEV_PATH
 
@@ -1986,30 +1875,30 @@ start_services() {
     print_screen_sessions
 }
 
-start_tmux(){
+start_tmux() {
     local session=$1
     kill_truedat
-    
+
     print_title
 
-    read -p "$(eval 'print_message "¿Cuantas términales hay que crear?: " "$COLOR_SECONDARY" "both"')" count    
-    
+    read -p "$(eval 'print_message "¿Cuantas términales hay que crear?: " "$COLOR_SECONDARY" "both"')" count
+
     create_tmux_session "$session"
-    
+
     if [ "$count" -lt 6 ]; then
         count=$((count - 1))
     fi
     tmux list-panes
-    for ((i=0; i<count; i++)); do
+    for ((i = 0; i < count; i++)); do
         # tmux split-window -h -t $session:0.$i
         tmux send-keys -t $session:0.$i "sleep 1 && neofetch" C-m
     done
     tmux list-panes
-    tmux select-layout tiled 
+    tmux select-layout tiled
     # go_to_tmux_session "$session"
 }
 
-create_tmux_session(){
+create_tmux_session() {
     local session=${1:-"$TMUX_SESSION"}
     tmux source-file $TMUX_PATH_CONFIG
     tmux new-session -d -s $session -n "$session"
@@ -2073,7 +1962,7 @@ count_tmux_termnals() {
 go_to_tmux_session() {
     local session=${1:-"$TMUX_SESSION"}
     clear
-    
+
     if [ "$session" = "$TMUX_SESSION" ]; then
         local cols=$((TMUX_ROWS_PER_COLUMN / 50))
         local rows=$((TMUX_ROWS_PER_COLUMN / 100))
@@ -2134,7 +2023,6 @@ kill_truedat() {
     tmux list-sessions -F "#{session_name}" | while read -r session; do
         tmux kill-session -t "$session" >/dev/null 2>&1
     done
-
 
     print_message "Matando front" "$COLOR_SECONDARY"
     pkill -9 -f yarn >/dev/null 2>&1
@@ -2375,14 +2263,18 @@ configure_menu() {
     case "$option" in
     1) install_truedat ;;
     2)
-        install_zsh
+        install_omz
         zsh_config
         ;;
     3) configuration_files_menu ;;
-    4) splash_loader ;;
-    5) swap ;;
-    6) animation_menu ;;
-    7) config_colours_menu ;;
+    4)
+        #animation_menu ;;
+        print_not_available
+        ;;
+    5)
+        #config_colours_menu ;;
+        print_not_available
+        ;;
     0) main_menu ;;
     esac
 }
@@ -2394,19 +2286,26 @@ configuration_files_menu() {
 
     case "$option" in
     1) zsh_config ;;
-    2) bash_config ;;
-    3) bash_config "y" ;;
-    4) tmux_config ;;
-    5) tlp_config ;;
-    6) hosts_config ;;
-    7)
+    2) tmux_config ;;
+    3) hosts_config ;;
+    4)
         zsh_config
-        bash_config "y"
         tmux_config
-        tlp_config
         hosts_config
         ;;
     0) configure_menu ;;
+    esac
+}
+
+animation_menu() {
+    local ANIMATION_MENU_OPTIONS=("0 - Volver" "1 - Pintar test animaciones" "${ANIMATIONS[@]}")
+    local option=$(print_menu "${ANIMATION_MENU_OPTIONS[@]}")
+
+    case "$option" in
+    0) main_menu ;;
+    1) print_test_animations ;;
+    *) update_config "SELECTED_ANIMATION" "$option" "$TRUS_CONFIG" ;;
+
     esac
 }
 
@@ -2811,8 +2710,7 @@ else
     source shell-tools
 
     set_terminal_config
-
-    param_router $*    
+    param_router $*
 fi
 
 # # print_message "cosas que antes habia y ahora no" "$color_primary"
